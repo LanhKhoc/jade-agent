@@ -108,4 +108,11 @@ public class ServerAgent extends Agent {
         msg.setContent(location);
         send(msg);
     }
+    
+    public void sendMessageDeleteAgent(String who) {
+        ACLMessage msg = new ACLMessage(ACLMessage.INFORM);
+        msg.addReceiver(new AID(who, AID.ISLOCALNAME));
+        msg.setOntology("delete");
+        send(msg);
+    }
 }

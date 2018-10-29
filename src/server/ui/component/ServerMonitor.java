@@ -57,8 +57,8 @@ public class ServerMonitor extends javax.swing.JFrame {
         jButton8 = new javax.swing.JButton();
         jButton9 = new javax.swing.JButton();
         diskInforBtn = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        createAgentBtn = new javax.swing.JButton();
+        deleteAgentBtn = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
@@ -127,7 +127,7 @@ public class ServerMonitor extends javax.swing.JFrame {
             .addGap(0, 300, Short.MAX_VALUE)
         );
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Server Monitor");
 
         jPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -156,11 +156,21 @@ public class ServerMonitor extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setText("Create Agent");
-        jButton1.setPreferredSize(new java.awt.Dimension(111, 23));
+        createAgentBtn.setText("Create Agent");
+        createAgentBtn.setPreferredSize(new java.awt.Dimension(111, 23));
+        createAgentBtn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                createAgentBtnMouseClicked(evt);
+            }
+        });
 
-        jButton2.setText("Delete Agent");
-        jButton2.setPreferredSize(new java.awt.Dimension(111, 23));
+        deleteAgentBtn.setText("Delete Agent");
+        deleteAgentBtn.setPreferredSize(new java.awt.Dimension(111, 23));
+        deleteAgentBtn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                deleteAgentBtnMouseClicked(evt);
+            }
+        });
 
         jButton3.setText("Control Agent");
         jButton3.setPreferredSize(new java.awt.Dimension(111, 23));
@@ -176,7 +186,7 @@ public class ServerMonitor extends javax.swing.JFrame {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(148, 148, 148)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -189,9 +199,9 @@ public class ServerMonitor extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(diskInforBtn))
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(createAgentBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(deleteAgentBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -205,8 +215,8 @@ public class ServerMonitor extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(createAgentBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(deleteAgentBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -661,8 +671,18 @@ public class ServerMonitor extends javax.swing.JFrame {
 
     private void moveBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_moveBtnMouseClicked
         // TODO add your handling code here:
-        ServerMonitorContainer.handleMoveAgentToLocation();
+        ServerMonitorContainer.handleMoveAgentLocation();
     }//GEN-LAST:event_moveBtnMouseClicked
+
+    private void createAgentBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_createAgentBtnMouseClicked
+        // TODO add your handling code here:
+        ServerMonitorContainer.openModalCreateAgent();
+    }//GEN-LAST:event_createAgentBtnMouseClicked
+
+    private void deleteAgentBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_deleteAgentBtnMouseClicked
+        // TODO add your handling code here:
+        ServerMonitorContainer.handleDeleteAgent();
+    }//GEN-LAST:event_deleteAgentBtnMouseClicked
 
     /**
      * @param args the command line arguments
@@ -700,11 +720,11 @@ public class ServerMonitor extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton createAgentBtn;
     private javax.swing.JLabel dateCreatedAgentLabel;
+    private javax.swing.JButton deleteAgentBtn;
     private javax.swing.JButton diskInforBtn;
     private javax.swing.JLabel idAgentLabel;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;

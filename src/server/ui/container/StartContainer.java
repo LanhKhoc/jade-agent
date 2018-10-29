@@ -13,6 +13,7 @@ import jade.wrapper.StaleProxyException;
 import javax.swing.JTextField;
 import server.CONFIG;
 import server.StoreServer;
+import utils.AgentUtil;
 import utils.Common;
 
 /**
@@ -68,21 +69,10 @@ public class StartContainer {
             AgentController rma = StoreServer.mainContainer.createNewAgent("rma", "jade.tools.rma.rma", new Object[0]);
             rma.start();
             
-            createAgent("ServerAgent", "server.agent.ServerAgent", new Object[0]);
-            createAgent("disk-server", "server.agent.DiskAgent", new Object[0]);
-            
-            // NOTE: For test
-            createAgent("disk-client", "client.agent.DiskAgent", new Object[0]);
+            AgentUtil.createAgent(StoreServer.mainContainer, "ServerAgent", "server.agent.ServerAgent", new Object[0]);
+            AgentUtil.createAgent(StoreServer.mainContainer, "disk-server", "server.agent.DiskAgent", new Object[0]);
         } catch (StaleProxyException e) {
             e.printStackTrace();
         }
-    }
-    
-    private static void createAgent(String agentNickName, String agentClassName, Object[] params) throws StaleProxyException {
-        StoreServer.mainContainer.createNewAgent(
-            agentNickName,
-            agentClassName,
-            params
-        ).start();
     }
 }

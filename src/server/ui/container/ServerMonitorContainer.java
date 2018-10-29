@@ -9,7 +9,6 @@ import jade.core.Location;
 import jade.domain.FIPAAgentManagement.AMSAgentDescription;
 import jade.wrapper.AgentController;
 import jade.wrapper.ControllerException;
-import java.util.HashMap;
 import java.util.Map;
 import javax.swing.DefaultListModel;
 import javax.swing.JLabel;
@@ -18,7 +17,9 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import server.StoreServer;
 import server.agent.ServerAgent;
+import server.ui.component.CreateAgent;
 import server.ui.component.ServerMonitor;
+import utils.AgentUtil;
 import utils.Common;
 
 /**
@@ -29,6 +30,7 @@ public class ServerMonitorContainer {
     private static ServerAgent serverAgent;
     
     private static ServerMonitor component;
+    
     private static JTable listAgentsTable;
     private static JLabel idAgentLabel;
     private static JLabel nameAgentLabel;
@@ -90,30 +92,11 @@ public class ServerMonitorContainer {
         workstationVersionLabel = _workstationVersionLabel;
     }
     
-    private static String getIPAddressFromName(String name) {
-        // NOTE: AgentName@IP:Port
-        int index1 = name.indexOf('@');
-        int index2 = name.indexOf(':');
-        return name.substring(index1 + 1, index2);
-    }
-    
-    private static Map<String, String> getDetailOfAgent(AMSAgentDescription desc) {
-        Map<String, String> map = new HashMap<>();
-        String[] addresses = desc.getName().getAddressesArray();
-        
-        map.put("id", desc.getName().getName());
-        map.put("name", desc.getName().getLocalName());
-        map.put("status", desc.getState());
-        map.put("position", (addresses != null && addresses.length > 0) ? addresses[0] : "");
-        map.put("ip", getIPAddressFromName(map.get("id")));
-        return map;
-    }
-    
     public static void showListAgents() {
         AMSAgentDescription[] descs = StoreServer.listAgents;
         Object[][] data = new Object[descs.length][4];
         for (int i = 0; i < descs.length; i++) {
-            Map<String, String> map = getDetailOfAgent(descs[i]);
+            Map<String, String> map = AgentUtil.getDetailOfAgent(descs[i]);
             data[i][0] = map.get("name");
             data[i][1] = map.get("status");
             data[i][2] = map.get("position");
@@ -124,7 +107,7 @@ public class ServerMonitorContainer {
     
     public static void showInforAgent(int index) {
         if (index > -1) {
-            Map<String, String> map = getDetailOfAgent(StoreServer.listAgents[index]);
+            Map<String, String> map = AgentUtil.getDetailOfAgent(StoreServer.listAgents[index]);
             idAgentLabel.setText(map.get("id"));
             nameAgentLabel.setText(map.get("name"));
             positonAgentLabel.setText(map.get("position"));
@@ -156,7 +139,7 @@ public class ServerMonitorContainer {
         workstationVersionLabel.setText(StoreServer.workstationVersion);
     }
     
-    public static void handleMoveAgentToLocation() {
+    public static void handleMoveAgentLocation() {
         int indexSelectedLocation = listLocation.getSelectedIndex();
         int indexSelectedAgent = listAgentsTable.getSelectedRow();
         Common.debug("MoveAgent", indexSelectedAgent + "->" + indexSelectedLocation);
@@ -178,8 +161,26 @@ public class ServerMonitorContainer {
         }
     }
     
+    public static void handleDeleteAgent() {
+        int indexSelectedAgent = listAgentsTable.getSelectedRow();
+        Common.debug("DeleteAgent", indexSelectedAgent + "");
+        
+        if (indexSelectedAgent > -1) {
+            AMSAgentDescription selectedAgent = StoreServer.listAgents[indexSelectedAgent];
+            String agentName = selectedAgent.getName().getLocalName();
+            serverAgent.sendMessageDeleteAgent(agentName);
+            
+            Common.toast(component, "Delete " + agentName);
+            reloadListAgents();
+        }
+    }
+    
     public static void reloadListLocations() {
         serverAgent.loadListLocations();
+    }
+    
+    public static void reloadListAgents() {
+        serverAgent.loadListAgents();
     }
     
     public static void refreshServer() {
@@ -191,5 +192,9 @@ public class ServerMonitorContainer {
     
     public static void showDiskInfor() {
         serverAgent.sendInternalRequest("disk-server");
+    }
+    
+    public static void openModalCreateAgent() {
+        new CreateAgent().setVisible(true);
     }
 }

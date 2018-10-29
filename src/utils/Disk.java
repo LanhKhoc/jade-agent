@@ -27,14 +27,13 @@ public class Disk {
 
     public static List<Disk> getAll() {
         List<Disk> list = new ArrayList<>();
-        File[] paths;
+        File[] paths = File.listRoots();
         FileSystemView fsv = FileSystemView.getFileSystemView();
-        paths = File.listRoots();
 
         for (File path : paths) {
-            String letter = path.toString().substring(0, 1);
+            String letter = fsv.getSystemDisplayName(path);
             String typeDescription = fsv.getSystemTypeDescription(path);
-            long capacityInGB = getCapacity(letter + ":/");
+            long capacityInGB = getCapacity(path);
             Disk driveInformation = new Disk(letter, typeDescription, capacityInGB);
             list.add(driveInformation);
         }
@@ -42,8 +41,7 @@ public class Disk {
         return list;
     }
 
-    private static long getCapacity(String path) {
-        File file = new File(path);
+    private static long getCapacity(File file) {
         long totalSpace = file.getTotalSpace();
         return totalSpace / 1024 / 1024 / 1024;
     }

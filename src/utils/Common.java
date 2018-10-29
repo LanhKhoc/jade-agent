@@ -5,6 +5,9 @@
  */
 package utils;
 
+import jade.domain.FIPAAgentManagement.AMSAgentDescription;
+import java.util.ArrayList;
+import java.util.Arrays;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
@@ -24,5 +27,15 @@ public class Common {
     
     public static void toast(JFrame context, String message) {
         JOptionPane.showMessageDialog(context, message);
+    }
+    
+    public static void toastDev(JFrame context, String message) {
+        if (develop) {
+            JOptionPane.showMessageDialog(context, message);
+        }
+    }
+    
+    public static String capitalize (final String str) {
+        return Character.toUpperCase(str.charAt(0)) + str.substring(1);
     }
 }

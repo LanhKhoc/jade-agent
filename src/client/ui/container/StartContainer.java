@@ -54,6 +54,8 @@ public class StartContainer {
         // NOTE: Set the default Profile to start a container
         ProfileImpl pContainer = new ProfileImpl(StoreClient.ipServer, StoreClient.portServer, null);
         StoreClient.agentContainer = rt.createAgentContainer(pContainer);
+        
         Common.debug("StartClient", "Launching the agent container " + pContainer);
+        Common.toastDev(null, "Connect successfull!");
     }
 }
