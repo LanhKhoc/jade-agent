@@ -10,6 +10,7 @@ import jade.core.ContainerID;
 import jade.lang.acl.ACLMessage;
 import java.util.Arrays;
 import java.util.List;
+import java.util.function.Function;
 
 /**
  *
@@ -22,6 +23,7 @@ public abstract class CoreAgent extends Agent {
         return SPECIAL_MESSAGE.contains(msg.getOntology());
     }
     
+    // OPTIMIZE: Should use functional
     protected void handleSpecialMessage(ACLMessage msg) {
         switch (msg.getOntology().toLowerCase()) {
             case "move": {

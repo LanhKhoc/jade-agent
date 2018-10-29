@@ -39,11 +39,8 @@ public class StartContainer {
         StoreServer.pathImages = pathImages;
         StoreServer.port = Integer.parseInt(serverPort);
         
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                initServerAgents();
-            }
+        new Thread(() -> {
+            initServerAgents();
         }).start();
     }
     
@@ -73,6 +70,9 @@ public class StartContainer {
             
             createAgent("ServerAgent", "server.agent.ServerAgent", new Object[0]);
             createAgent("disk-server", "server.agent.DiskAgent", new Object[0]);
+            
+            // NOTE: For test
+            createAgent("disk-client", "client.agent.DiskAgent", new Object[0]);
         } catch (StaleProxyException e) {
             e.printStackTrace();
         }

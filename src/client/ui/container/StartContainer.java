@@ -38,6 +38,12 @@ public class StartContainer {
         StoreClient.ipServer = ipServerTxt.getText();
         StoreClient.portServer = Integer.parseInt(portServerTxt.getText());
         
+        new Thread(() -> {
+            initAgentContainer();
+        }).start();
+    }
+    
+    private static void initAgentContainer() {
         // Get a hold on JADE runtime
         Runtime rt = Runtime.instance();
 
