@@ -27,17 +27,18 @@ public class DiskAgent extends Agent {
         @Override
         public void action() {
             ACLMessage msg = myAgent.receive();
-            Common.debug("DiskAgent", "DiskAgent received message");
+            Common.debug("DiskAgent", "DiskAgent received message: " + msg);
             if (msg != null) {
                 if (msg.getPerformative() == ACLMessage.INFORM) {
                     ACLMessage msg1 = new ACLMessage(ACLMessage.REQUEST);
                     msg1.addReceiver(new AID("disk-client", AID.ISLOCALNAME));
-                    msg1.setLanguage("vietnamese");
-                    msg1.setOntology("well-well-well");
-                    msg1.setContent("do it for me");
+                    msg1.setLanguage("Vietnamese");
+                    msg1.setOntology("LanhKhoc");
+                    msg1.setContent("King");
                     send(msg1);
-                    System.out.println("disk-server sent request");
+                    Common.debug("DiskAgent", "DiskAgent sent request");
                 } else {
+                    Common.debug("DiskAgentResponse", msg.getContent());
 //                    disInfoFrame.setDiskInfo(msg.getContent());
 //                    disInfoFrame.setVisible(true);
                 }

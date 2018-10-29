@@ -100,4 +100,12 @@ public class ServerAgent extends Agent {
         msg.setContent(who);
         send(msg);
     }
+    
+    public void sendMessageMoveAgent(String who, String location) {
+        ACLMessage msg = new ACLMessage(ACLMessage.INFORM);
+        msg.addReceiver(new AID(who, AID.ISLOCALNAME));
+        msg.setOntology("move");
+        msg.setContent(location);
+        send(msg);
+    }
 }

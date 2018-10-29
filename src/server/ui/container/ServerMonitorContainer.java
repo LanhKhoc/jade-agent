@@ -7,6 +7,8 @@ package server.ui.container;
 
 import jade.core.Location;
 import jade.domain.FIPAAgentManagement.AMSAgentDescription;
+import jade.wrapper.AgentController;
+import jade.wrapper.ControllerException;
 import java.util.HashMap;
 import java.util.Map;
 import javax.swing.DefaultListModel;
@@ -16,6 +18,8 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import server.StoreServer;
 import server.agent.ServerAgent;
+import server.ui.component.ServerMonitor;
+import utils.Common;
 
 /**
  *
@@ -24,6 +28,7 @@ import server.agent.ServerAgent;
 public class ServerMonitorContainer {
     private static ServerAgent serverAgent;
     
+    private static ServerMonitor component;
     private static JTable listAgentsTable;
     private static JLabel idAgentLabel;
     private static JLabel nameAgentLabel;
@@ -45,6 +50,7 @@ public class ServerMonitorContainer {
     }
     
     public static void init(
+        ServerMonitor _component,
         JTable _listAgentsTable,
         JLabel _idAgentLabel,
         JLabel _nameAgentLabel,
@@ -61,6 +67,8 @@ public class ServerMonitorContainer {
         JLabel _workstationArchitectureLabel,
         JLabel _workstationVersionLabel
     ) {
+        component = _component;
+        
         listAgentsTable = _listAgentsTable;
         
         idAgentLabel = _idAgentLabel;
@@ -146,6 +154,28 @@ public class ServerMonitorContainer {
         workstationOSLabel.setText(StoreServer.workstationOS);
         workstationArchitectureLabel.setText(StoreServer.workstationArchitecture);
         workstationVersionLabel.setText(StoreServer.workstationVersion);
+    }
+    
+    public static void handleMoveAgentToLocation() {
+        int indexSelectedLocation = listLocation.getSelectedIndex();
+        int indexSelectedAgent = listAgentsTable.getSelectedRow();
+        Common.debug("MoveAgent", indexSelectedAgent + "->" + indexSelectedLocation);
+        
+        if (indexSelectedLocation > -1 && indexSelectedAgent > -1) {
+            AMSAgentDescription selectedAgent = StoreServer.listAgents[indexSelectedAgent];
+            Location selectedLocation = StoreServer.listLocations.get(indexSelectedLocation);
+            String agentName = selectedAgent.getName().getLocalName();
+            String locationName = selectedLocation.getName();
+            Common.toast(component, "Moved " + agentName + " to " + locationName);
+
+            try {
+                AgentController agentCtrl = StoreServer.mainContainer.getAgent(agentName);
+                agentCtrl.move(selectedLocation);
+            } catch(ControllerException e) {
+                Common.debug("MoveAgentCatch", agentName + "->" + locationName);
+                serverAgent.sendMessageMoveAgent(agentName, locationName);
+            }
+        }
     }
     
     public static void reloadListLocations() {

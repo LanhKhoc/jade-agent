@@ -20,6 +20,7 @@ public class ServerMonitor extends javax.swing.JFrame {
     public ServerMonitor() {
         initComponents();
         ServerMonitorContainer.init(
+            this,
             this.listAgentsTable,
             this.idAgentLabel,
             this.nameAgentLabel,
@@ -49,6 +50,7 @@ public class ServerMonitor extends javax.swing.JFrame {
 
         jMenu3 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
+        jDialog1 = new javax.swing.JDialog();
         jPanel2 = new javax.swing.JPanel();
         jButton6 = new javax.swing.JButton();
         jButton7 = new javax.swing.JButton();
@@ -99,7 +101,7 @@ public class ServerMonitor extends javax.swing.JFrame {
         jScrollPane3 = new javax.swing.JScrollPane();
         listLocation = new javax.swing.JList<>();
         jPanel9 = new javax.swing.JPanel();
-        jButton11 = new javax.swing.JButton();
+        moveBtn = new javax.swing.JButton();
         updateWorkstationBtn = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
@@ -113,6 +115,17 @@ public class ServerMonitor extends javax.swing.JFrame {
         jMenu3.setText("jMenu3");
 
         jMenuItem1.setText("jMenuItem1");
+
+        javax.swing.GroupLayout jDialog1Layout = new javax.swing.GroupLayout(jDialog1.getContentPane());
+        jDialog1.getContentPane().setLayout(jDialog1Layout);
+        jDialog1Layout.setHorizontalGroup(
+            jDialog1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 400, Short.MAX_VALUE)
+        );
+        jDialog1Layout.setVerticalGroup(
+            jDialog1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 300, Short.MAX_VALUE)
+        );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Server Monitor");
@@ -185,7 +198,7 @@ public class ServerMonitor extends javax.swing.JFrame {
                         .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(309, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -224,7 +237,6 @@ public class ServerMonitor extends javax.swing.JFrame {
 
         listAgentsTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
                 {null, null, null, null},
                 {null, null, null, null},
                 {null, null, null, null},
@@ -425,11 +437,11 @@ public class ServerMonitor extends javax.swing.JFrame {
 
         jLabel1.setText("Server IP:");
 
-        serverIPLabel.setText("192.168.110.114");
+        serverIPLabel.setText("...");
 
         jLabel3.setText("Server Port:");
 
-        serverPortLabel.setText("55585");
+        serverPortLabel.setText("...");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -477,10 +489,15 @@ public class ServerMonitor extends javax.swing.JFrame {
             .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
         );
 
-        jButton11.setText("Move");
-        jButton11.addActionListener(new java.awt.event.ActionListener() {
+        moveBtn.setText("Move");
+        moveBtn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                moveBtnMouseClicked(evt);
+            }
+        });
+        moveBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton11ActionPerformed(evt);
+                moveBtnActionPerformed(evt);
             }
         });
 
@@ -498,7 +515,7 @@ public class ServerMonitor extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel9Layout.createSequentialGroup()
                 .addContainerGap(23, Short.MAX_VALUE)
                 .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jButton11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(moveBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(updateWorkstationBtn, javax.swing.GroupLayout.DEFAULT_SIZE, 95, Short.MAX_VALUE))
                 .addGap(21, 21, 21))
         );
@@ -506,7 +523,7 @@ public class ServerMonitor extends javax.swing.JFrame {
             jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel9Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jButton11)
+                .addComponent(moveBtn)
                 .addGap(18, 18, 18)
                 .addComponent(updateWorkstationBtn)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -623,9 +640,9 @@ public class ServerMonitor extends javax.swing.JFrame {
         ServerMonitorContainer.showInforAgent(this.listAgentsTable.getSelectedRow());
     }//GEN-LAST:event_listAgentsTableMouseClicked
 
-    private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
+    private void moveBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_moveBtnActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton11ActionPerformed
+    }//GEN-LAST:event_moveBtnActionPerformed
 
     private void updateWorkstationBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_updateWorkstationBtnMouseClicked
         // TODO add your handling code here:
@@ -641,6 +658,11 @@ public class ServerMonitor extends javax.swing.JFrame {
         // TODO add your handling code here:
         ServerMonitorContainer.showDiskInfor();
     }//GEN-LAST:event_diskInforBtnMouseClicked
+
+    private void moveBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_moveBtnMouseClicked
+        // TODO add your handling code here:
+        ServerMonitorContainer.handleMoveAgentToLocation();
+    }//GEN-LAST:event_moveBtnMouseClicked
 
     /**
      * @param args the command line arguments
@@ -682,7 +704,6 @@ public class ServerMonitor extends javax.swing.JFrame {
     private javax.swing.JButton diskInforBtn;
     private javax.swing.JLabel idAgentLabel;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton11;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
@@ -691,6 +712,7 @@ public class ServerMonitor extends javax.swing.JFrame {
     private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;
     private javax.swing.JButton jButton9;
+    private javax.swing.JDialog jDialog1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -727,6 +749,7 @@ public class ServerMonitor extends javax.swing.JFrame {
     private javax.swing.JTable jTable2;
     private javax.swing.JTable listAgentsTable;
     private javax.swing.JList<String> listLocation;
+    private javax.swing.JButton moveBtn;
     private javax.swing.JLabel nameAgentLabel;
     private javax.swing.JLabel positionAgentLabel;
     private javax.swing.JMenuItem refreshServerMenuItem;

@@ -5,6 +5,9 @@
  */
 package utils;
 
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Admin
@@ -17,5 +20,9 @@ public class Common {
         if (develop) {
             System.out.println(">>> " + label.toUpperCase() + ": " + value);
         }
+    }
+    
+    public static void toast(JFrame context, String message) {
+        JOptionPane.showMessageDialog(context, message);
     }
 }
