@@ -5,11 +5,14 @@
  */
 package client;
 
+import jade.wrapper.AgentContainer;
+
 /**
  *
  * @author Admin
  */
 public class StoreClient {
    public static String ipServer; 
-   public static String portServer;
+   public static int portServer;
+   public static AgentContainer agentContainer;
 }

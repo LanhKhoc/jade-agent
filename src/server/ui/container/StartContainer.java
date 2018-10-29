@@ -39,7 +39,12 @@ public class StartContainer {
         StoreServer.pathImages = pathImages;
         StoreServer.port = Integer.parseInt(serverPort);
         
-        initServerAgents();
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                initServerAgents();
+            }
+        }).start();
     }
     
     public static void handleClickDefaultBtn() {
@@ -49,7 +54,7 @@ public class StartContainer {
         StoreServer.port = CONFIG.PORT;
     }
     
-    private static void initServerAgents() {
+    public static void initServerAgents() {
         Runtime rt = Runtime.instance();
         
         // NOTE: Exit the JVM when there are no more containers around

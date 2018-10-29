@@ -12,7 +12,7 @@ import client.ui.component.Start;
  * @author Admin
  */
 public class MainClient {
-    /**
+    /**0
      * @param args the command line arguments
      */
     public static void main(String[] args) {

@@ -5,9 +5,12 @@
  */
 package client.ui.container;
 
+import jade.core.Runtime;
 import javax.swing.JTextField;
 import client.CONFIG;
 import client.StoreClient;
+import jade.core.ProfileImpl;
+import utils.Common;
 
 /**
  *
@@ -33,6 +36,18 @@ public class StartContainer {
     
     public static void handleConnectToServer() {
         StoreClient.ipServer = ipServerTxt.getText();
-        StoreClient.portServer = portServerTxt.getText();
+        StoreClient.portServer = Integer.parseInt(portServerTxt.getText());
+        
+        // Get a hold on JADE runtime
+        Runtime rt = Runtime.instance();
+
+        // NOTE: Exit the JVM when there are no more containers around
+        rt.setCloseVM(true);
+        Common.debug("StartClient", "Runtime created");
+
+        // NOTE: Set the default Profile to start a container
+        ProfileImpl pContainer = new ProfileImpl(StoreClient.ipServer, StoreClient.portServer, null);
+        StoreClient.agentContainer = rt.createAgentContainer(pContainer);
+        Common.debug("StartClient", "Launching the agent container " + pContainer);
     }
 }
