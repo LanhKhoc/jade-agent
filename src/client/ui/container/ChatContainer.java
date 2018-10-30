@@ -40,7 +40,9 @@ public class ChatContainer {
     
     public static void handleSendChat() {
         String message = chatTxt.getText();
-        chatAgent.sendInternalRequest("chat-client", message);
+        if (!message.equals("")) {
+            chatAgent.sendInternalRequest("chat-client", message);
+        }
     }
     
     public static void showChat() {
@@ -52,7 +54,9 @@ public class ChatContainer {
             String chat = who + ": " + message + "\n";
             Document doc = chatContentPane.getDocument();
             doc.insertString(doc.getLength(), chat, null);
-            chatTxt.setText("");
+            if (who.equals("You")) {
+                chatTxt.setText("");
+            }
         } catch (BadLocationException e) {
             e.printStackTrace();
         }
