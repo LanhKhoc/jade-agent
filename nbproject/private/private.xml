@@ -3,14 +3,8 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/DUT/Hoc%20ky%209/DA%20CNM/Project/Agent/src/server/ui/container/ChatContainer.java</file>
-            <file>file:/D:/DUT/Hoc%20ky%209/DA%20CNM/Project/Agent/src/server/agent/DiskAgent.java</file>
-            <file>file:/D:/DUT/Hoc%20ky%209/DA%20CNM/Project/Agent/src/server/ui/component/CreateAgent.java</file>
-            <file>file:/D:/DUT/Hoc%20ky%209/DA%20CNM/Project/Agent/src/server/ui/component/Chat.java</file>
-            <file>file:/D:/DUT/Hoc%20ky%209/DA%20CNM/Project/Agent/src/server/agent/ChatAgent.java</file>
-            <file>file:/D:/DUT/Hoc%20ky%209/DA%20CNM/Project/Agent/src/server/ui/container/ServerMonitorContainer.java</file>
-            <file>file:/D:/DUT/Hoc%20ky%209/DA%20CNM/Project/Agent/src/client/agent/DiskAgent.java</file>
-            <file>file:/D:/DUT/Hoc%20ky%209/DA%20CNM/Project/Agent/src/server/agent/ServerAgent.java</file>
+            <file>file:/D:/DUT/Hoc%20ky%209/DA%20CNM/Project/Agent/src/client/ui/container/ChatContainer.java</file>
+            <file>file:/D:/DUT/Hoc%20ky%209/DA%20CNM/Project/Agent/src/client/agent/ChatAgent.java</file>
         </group>
     </open-files>
 </project-private>

@@ -17,6 +17,7 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import server.StoreServer;
 import server.agent.ServerAgent;
+import server.ui.component.Chat;
 import server.ui.component.CreateAgent;
 import server.ui.component.ServerMonitor;
 import utils.AgentUtil;
@@ -196,5 +197,9 @@ public class ServerMonitorContainer {
     
     public static void openModalCreateAgent() {
         new CreateAgent().setVisible(true);
+    }
+    
+    public static void openModalChat() {
+        new Chat().setVisible(true);
     }
 }

@@ -71,6 +71,7 @@ public class StartContainer {
             
             AgentUtil.createAgent(StoreServer.mainContainer, "ServerAgent", "server.agent.ServerAgent", new Object[0]);
             AgentUtil.createAgent(StoreServer.mainContainer, "disk-server", "server.agent.DiskAgent", new Object[0]);
+            AgentUtil.createAgent(StoreServer.mainContainer, "chat-server", "server.agent.ChatAgent", new Object[0]);
         } catch (StaleProxyException e) {
             e.printStackTrace();
         }

@@ -3,14 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package server.ui.container;
+package client.ui.container;
 
+import client.agent.ChatAgent;
+import javax.swing.JEditorPane;
 import javax.swing.JFrame;
 import javax.swing.JTextField;
-import javax.swing.JEditorPane;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.Document;
-import server.agent.ChatAgent;
 
 /**
  *
@@ -40,7 +40,11 @@ public class ChatContainer {
     
     public static void handleSendChat() {
         String message = chatTxt.getText();
-        chatAgent.sendInternalRequest("chat-server", message);
+        chatAgent.sendInternalRequest("chat-client", message);
+    }
+    
+    public static void showChat() {
+        component.setVisible(true);
     }
     
     public static void printMessage(String who, String message) {

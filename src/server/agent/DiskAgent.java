@@ -38,7 +38,7 @@ public class DiskAgent extends Agent {
                     msg1.addReceiver(new AID("disk-client", AID.ISLOCALNAME));
                     msg1.setLanguage("Vietnamese");
                     msg1.setOntology("LanhKhoc");
-                    msg1.setContent("King");
+                    msg1.setContent("DiskServer");
                     send(msg1);
                     Common.debug("DiskAgent", "DiskAgent sent request");
                 } else {

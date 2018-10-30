@@ -21,6 +21,7 @@ public class DiskAgent extends CoreAgent {
         addBehaviour(new ResponseDiskInfo());
         Common.debug("DiskAgent", "disk-client is running...");
     }
+
     
     private class ResponseDiskInfo extends CyclicBehaviour {
         @Override
