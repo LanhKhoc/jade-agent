@@ -62,4 +62,8 @@ public abstract class CoreAgent extends Agent {
         msg.setContent(content);
         send(msg);
     }
+    
+    public String agentDebug(String str) {
+        return getAID().getLocalName() + " " + str;
+    }
 }

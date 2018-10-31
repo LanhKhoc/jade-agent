@@ -32,6 +32,7 @@ public class StartContainer {
     
     private static void fillDefaultToInput() {
         portServerTxt.setText(CONFIG.PORT + "");
+        ipServerTxt.setText("192.168.1.24");
     }
     
     public static void handleConnectToServer() {

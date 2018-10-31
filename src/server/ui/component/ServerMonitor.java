@@ -52,7 +52,7 @@ public class ServerMonitor extends javax.swing.JFrame {
         jMenuItem1 = new javax.swing.JMenuItem();
         jDialog1 = new javax.swing.JDialog();
         jPanel2 = new javax.swing.JPanel();
-        jButton6 = new javax.swing.JButton();
+        captureScreenBtn = new javax.swing.JButton();
         jButton7 = new javax.swing.JButton();
         jButton8 = new javax.swing.JButton();
         jButton9 = new javax.swing.JButton();
@@ -132,8 +132,13 @@ public class ServerMonitor extends javax.swing.JFrame {
 
         jPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        jButton6.setText("Print Screen");
-        jButton6.setPreferredSize(new java.awt.Dimension(111, 23));
+        captureScreenBtn.setText("Capture Screen");
+        captureScreenBtn.setPreferredSize(new java.awt.Dimension(111, 23));
+        captureScreenBtn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                captureScreenBtnMouseClicked(evt);
+            }
+        });
 
         jButton7.setText("Shutdown");
         jButton7.setPreferredSize(new java.awt.Dimension(111, 23));
@@ -194,7 +199,7 @@ public class ServerMonitor extends javax.swing.JFrame {
                 .addGap(148, 148, 148)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(captureScreenBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -227,7 +232,7 @@ public class ServerMonitor extends javax.swing.JFrame {
                     .addComponent(chatBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(captureScreenBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -694,6 +699,11 @@ public class ServerMonitor extends javax.swing.JFrame {
         ServerMonitorContainer.openModalChat();
     }//GEN-LAST:event_chatBtnMouseClicked
 
+    private void captureScreenBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_captureScreenBtnMouseClicked
+        // TODO add your handling code here:
+        ServerMonitorContainer.showCaptureScreen();
+    }//GEN-LAST:event_captureScreenBtnMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -730,6 +740,7 @@ public class ServerMonitor extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton captureScreenBtn;
     private javax.swing.JButton chatBtn;
     private javax.swing.JButton createAgentBtn;
     private javax.swing.JLabel dateCreatedAgentLabel;
@@ -738,7 +749,6 @@ public class ServerMonitor extends javax.swing.JFrame {
     private javax.swing.JLabel idAgentLabel;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;
     private javax.swing.JButton jButton9;

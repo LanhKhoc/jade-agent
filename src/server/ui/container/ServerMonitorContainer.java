@@ -202,4 +202,8 @@ public class ServerMonitorContainer {
     public static void openModalChat() {
         new Chat().setVisible(true);
     }
+    
+    public static void showCaptureScreen() {
+        serverAgent.sendInternalRequest("capture-screen-server");
+    }
 }

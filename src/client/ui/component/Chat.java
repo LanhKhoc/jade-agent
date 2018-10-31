@@ -42,7 +42,7 @@ public class Chat extends javax.swing.JFrame {
         chatTxt = new javax.swing.JTextField();
         sendBtn = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Chat Client");
 
         chatContentPane.setEditable(false);

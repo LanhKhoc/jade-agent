@@ -6,6 +6,7 @@
 package server;
 
 import server.ui.component.Start;
+import utils.CaptureScreen;
 
 /**
  *

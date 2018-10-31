@@ -48,8 +48,6 @@ public class DiskAgent extends Agent {
             } else {
                 block();
             }
-
         }
-
     }
 }
