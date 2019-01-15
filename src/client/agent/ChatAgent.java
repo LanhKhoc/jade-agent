@@ -8,7 +8,6 @@ package client.agent;
 import client.ui.component.Chat;
 import client.ui.container.ChatContainer;
 import jade.core.behaviours.CyclicBehaviour;
-import jade.core.behaviours.OneShotBehaviour;
 import jade.lang.acl.ACLMessage;
 import javax.swing.JFrame;
 import utils.Common;
@@ -48,11 +47,11 @@ public class ChatAgent extends CoreAgent {
         public void action() {
             ACLMessage msg = myAgent.receive();
             if (msg != null) {
+                Common.debug("ChatAgent", "chat-client recieved message: " + msg.getContent());
                 if (isSpecialMessage(msg)) {
                     handleSpecialMessage(msg);
                 } else {
                     String content = msg.getContent();
-                    Common.debug("ChatAgent", "chat-client recieved message: " + content);
                     switch (msg.getPerformative()) {
                         case ACLMessage.REQUEST: {
                             handleReceiveMessageFromServer(msg);

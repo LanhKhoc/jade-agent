@@ -115,4 +115,18 @@ public class ServerAgent extends Agent {
         msg.setOntology("delete");
         send(msg);
     }
+    
+    public void sendMessageSuspendAgent(String who) {
+        ACLMessage msg = new ACLMessage(ACLMessage.INFORM);
+        msg.addReceiver(new AID(who, AID.ISLOCALNAME));
+        msg.setOntology("suspend");
+        send(msg);
+    }
+    
+    public void sendMessageActiveAgent(String who) {
+        ACLMessage msg = new ACLMessage(ACLMessage.INFORM);
+        msg.addReceiver(new AID(who, AID.ISLOCALNAME));
+        msg.setOntology("active");
+        send(msg);
+    }
 }

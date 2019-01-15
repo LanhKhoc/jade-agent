@@ -22,8 +22,6 @@ public class CaptureScreenAgent extends CoreAgent {
     @Override
     protected void setup() {
         addBehaviour(new RequestCaptureScreen());
-//        new DiskInformation().setVisible(false);
-//        DiskInformationContainer.initAgent(this);
         Common.debug("CaptureScreen", "capture-screen-server is running...");
     }
     
@@ -59,6 +57,5 @@ public class CaptureScreenAgent extends CoreAgent {
                 block();
             }
         } 
-
     }
 }

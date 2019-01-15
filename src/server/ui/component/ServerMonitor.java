@@ -9,6 +9,7 @@ import server.ui.container.ServerMonitorContainer;
 import jade.core.Location;
 import javax.swing.DefaultListModel;
 import server.agent.ServerAgent;
+import utils.Common;
 
 /**
  *
@@ -53,14 +54,14 @@ public class ServerMonitor extends javax.swing.JFrame {
         jDialog1 = new javax.swing.JDialog();
         jPanel2 = new javax.swing.JPanel();
         captureScreenBtn = new javax.swing.JButton();
-        jButton7 = new javax.swing.JButton();
-        jButton8 = new javax.swing.JButton();
-        jButton9 = new javax.swing.JButton();
+        shutdownBtn = new javax.swing.JButton();
+        restartBtn = new javax.swing.JButton();
+        logoutBtn = new javax.swing.JButton();
         diskInforBtn = new javax.swing.JButton();
         createAgentBtn = new javax.swing.JButton();
         deleteAgentBtn = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        controlAgentBtn = new javax.swing.JButton();
+        notifyBtn = new javax.swing.JButton();
         chatBtn = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -104,13 +105,16 @@ public class ServerMonitor extends javax.swing.JFrame {
         moveBtn = new javax.swing.JButton();
         updateWorkstationBtn = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
+        serverManagerMenu = new javax.swing.JMenu();
         refreshServerMenuItem = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
         jMenuItem3 = new javax.swing.JMenuItem();
-        jMenu2 = new javax.swing.JMenu();
+        generalControlMenu = new javax.swing.JMenu();
+        suspendMenuItem = new javax.swing.JMenuItem();
+        jMenuItem6 = new javax.swing.JMenuItem();
+        killAgentMenuItem = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
-        jMenuItem4 = new javax.swing.JMenuItem();
+        aboutMenuItem = new javax.swing.JMenuItem();
 
         jMenu3.setText("jMenu3");
 
@@ -140,19 +144,29 @@ public class ServerMonitor extends javax.swing.JFrame {
             }
         });
 
-        jButton7.setText("Shutdown");
-        jButton7.setPreferredSize(new java.awt.Dimension(111, 23));
-        jButton7.addActionListener(new java.awt.event.ActionListener() {
+        shutdownBtn.setText("Shutdown");
+        shutdownBtn.setPreferredSize(new java.awt.Dimension(111, 23));
+        shutdownBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton7ActionPerformed(evt);
+                shutdownBtnActionPerformed(evt);
             }
         });
 
-        jButton8.setText("Restart");
-        jButton8.setPreferredSize(new java.awt.Dimension(111, 23));
+        restartBtn.setText("Restart");
+        restartBtn.setPreferredSize(new java.awt.Dimension(111, 23));
+        restartBtn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                restartBtnMouseClicked(evt);
+            }
+        });
 
-        jButton9.setText("Logout");
-        jButton9.setPreferredSize(new java.awt.Dimension(111, 23));
+        logoutBtn.setText("Logout");
+        logoutBtn.setPreferredSize(new java.awt.Dimension(111, 23));
+        logoutBtn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                logoutBtnMouseClicked(evt);
+            }
+        });
 
         diskInforBtn.setText("Disk Information");
         diskInforBtn.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -177,11 +191,21 @@ public class ServerMonitor extends javax.swing.JFrame {
             }
         });
 
-        jButton3.setText("Control Agent");
-        jButton3.setPreferredSize(new java.awt.Dimension(111, 23));
+        controlAgentBtn.setText("Control Agent");
+        controlAgentBtn.setPreferredSize(new java.awt.Dimension(111, 23));
+        controlAgentBtn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                controlAgentBtnMouseClicked(evt);
+            }
+        });
 
-        jButton4.setText("Notify");
-        jButton4.setPreferredSize(new java.awt.Dimension(111, 23));
+        notifyBtn.setText("Notify");
+        notifyBtn.setPreferredSize(new java.awt.Dimension(111, 23));
+        notifyBtn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                notifyBtnMouseClicked(evt);
+            }
+        });
 
         chatBtn.setText("Chat");
         chatBtn.setPreferredSize(new java.awt.Dimension(111, 23));
@@ -201,11 +225,11 @@ public class ServerMonitor extends javax.swing.JFrame {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(captureScreenBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(shutdownBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(restartBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(logoutBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(diskInforBtn))
                     .addGroup(jPanel2Layout.createSequentialGroup()
@@ -213,9 +237,9 @@ public class ServerMonitor extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(deleteAgentBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(controlAgentBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(notifyBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(chatBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -227,15 +251,15 @@ public class ServerMonitor extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(createAgentBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(deleteAgentBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(controlAgentBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(notifyBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(chatBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(captureScreenBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(shutdownBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(restartBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(logoutBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(diskInforBtn))
                 .addGap(16, 16, 16))
         );
@@ -568,7 +592,7 @@ public class ServerMonitor extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        jMenu1.setText("Server Manager");
+        serverManagerMenu.setText("Server Manager");
 
         refreshServerMenuItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_R, java.awt.event.InputEvent.CTRL_MASK));
         refreshServerMenuItem.setText("Refresh");
@@ -577,7 +601,7 @@ public class ServerMonitor extends javax.swing.JFrame {
                 refreshServerMenuItemActionPerformed(evt);
             }
         });
-        jMenu1.add(refreshServerMenuItem);
+        serverManagerMenu.add(refreshServerMenuItem);
 
         jMenuItem2.setText("Move Server");
         jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
@@ -585,22 +609,57 @@ public class ServerMonitor extends javax.swing.JFrame {
                 jMenuItem2ActionPerformed(evt);
             }
         });
-        jMenu1.add(jMenuItem2);
+        serverManagerMenu.add(jMenuItem2);
 
         jMenuItem3.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_W, java.awt.event.InputEvent.CTRL_MASK));
         jMenuItem3.setText("Shutdown Server");
-        jMenu1.add(jMenuItem3);
+        serverManagerMenu.add(jMenuItem3);
 
-        jMenuBar1.add(jMenu1);
+        jMenuBar1.add(serverManagerMenu);
 
-        jMenu2.setText("General Control");
-        jMenuBar1.add(jMenu2);
+        generalControlMenu.setText("General Control");
+        generalControlMenu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                generalControlMenuActionPerformed(evt);
+            }
+        });
+
+        suspendMenuItem.setText("Suspend");
+        suspendMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                suspendMenuItemActionPerformed(evt);
+            }
+        });
+        generalControlMenu.add(suspendMenuItem);
+
+        jMenuItem6.setText("Active");
+        jMenuItem6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem6ActionPerformed(evt);
+            }
+        });
+        generalControlMenu.add(jMenuItem6);
+
+        killAgentMenuItem.setText("Kill");
+        killAgentMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                killAgentMenuItemActionPerformed(evt);
+            }
+        });
+        generalControlMenu.add(killAgentMenuItem);
+
+        jMenuBar1.add(generalControlMenu);
 
         jMenu4.setText("Information");
 
-        jMenuItem4.setText("About");
-        jMenuItem4.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jMenu4.add(jMenuItem4);
+        aboutMenuItem.setText("About");
+        aboutMenuItem.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        aboutMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                aboutMenuItemActionPerformed(evt);
+            }
+        });
+        jMenu4.add(aboutMenuItem);
 
         jMenuBar1.add(jMenu4);
 
@@ -651,9 +710,10 @@ public class ServerMonitor extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
-    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+    private void shutdownBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_shutdownBtnActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton7ActionPerformed
+        ServerMonitorContainer.handleShutdown();
+    }//GEN-LAST:event_shutdownBtnActionPerformed
 
     private void listAgentsTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_listAgentsTableMouseClicked
         // TODO add your handling code here:
@@ -704,6 +764,50 @@ public class ServerMonitor extends javax.swing.JFrame {
         ServerMonitorContainer.showCaptureScreen();
     }//GEN-LAST:event_captureScreenBtnMouseClicked
 
+    private void logoutBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_logoutBtnMouseClicked
+        // TODO add your handling code here:
+        ServerMonitorContainer.handleLogout();
+    }//GEN-LAST:event_logoutBtnMouseClicked
+
+    private void notifyBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_notifyBtnMouseClicked
+        // TODO add your handling code here:
+        ServerMonitorContainer.openModalNotify();
+    }//GEN-LAST:event_notifyBtnMouseClicked
+
+    private void controlAgentBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_controlAgentBtnMouseClicked
+        // TODO add your handling code here:
+        ServerMonitorContainer.openModalControlAgent();
+    }//GEN-LAST:event_controlAgentBtnMouseClicked
+
+    private void suspendMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_suspendMenuItemActionPerformed
+        // TODO add your handling code here:
+        ServerMonitorContainer.handleSuspendAgent();
+    }//GEN-LAST:event_suspendMenuItemActionPerformed
+
+    private void generalControlMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_generalControlMenuActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_generalControlMenuActionPerformed
+
+    private void killAgentMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_killAgentMenuItemActionPerformed
+        // TODO add your handling code here:
+        ServerMonitorContainer.handleDeleteAgent();
+    }//GEN-LAST:event_killAgentMenuItemActionPerformed
+
+    private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
+        // TODO add your handling code here:
+        ServerMonitorContainer.handleActiveAgent();
+    }//GEN-LAST:event_jMenuItem6ActionPerformed
+
+    private void aboutMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aboutMenuItemActionPerformed
+        // TODO add your handling code here:
+        Common.toast(this, "Develop by LanhKhoc");
+    }//GEN-LAST:event_aboutMenuItemActionPerformed
+
+    private void restartBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_restartBtnMouseClicked
+        // TODO add your handling code here:
+        ServerMonitorContainer.handleRestart();
+    }//GEN-LAST:event_restartBtnMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -740,18 +844,16 @@ public class ServerMonitor extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenuItem aboutMenuItem;
     private javax.swing.JButton captureScreenBtn;
     private javax.swing.JButton chatBtn;
+    private javax.swing.JButton controlAgentBtn;
     private javax.swing.JButton createAgentBtn;
     private javax.swing.JLabel dateCreatedAgentLabel;
     private javax.swing.JButton deleteAgentBtn;
     private javax.swing.JButton diskInforBtn;
+    private javax.swing.JMenu generalControlMenu;
     private javax.swing.JLabel idAgentLabel;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton7;
-    private javax.swing.JButton jButton8;
-    private javax.swing.JButton jButton9;
     private javax.swing.JDialog jDialog1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -766,15 +868,13 @@ public class ServerMonitor extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
-    private javax.swing.JMenuItem jMenuItem4;
+    private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
@@ -787,16 +887,23 @@ public class ServerMonitor extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTable jTable2;
+    private javax.swing.JMenuItem killAgentMenuItem;
     private javax.swing.JTable listAgentsTable;
     private javax.swing.JList<String> listLocation;
+    private javax.swing.JButton logoutBtn;
     private javax.swing.JButton moveBtn;
     private javax.swing.JLabel nameAgentLabel;
+    private javax.swing.JButton notifyBtn;
     private javax.swing.JLabel positionAgentLabel;
     private javax.swing.JMenuItem refreshServerMenuItem;
+    private javax.swing.JButton restartBtn;
     private javax.swing.JLabel serverIPLabel;
+    private javax.swing.JMenu serverManagerMenu;
     private javax.swing.JLabel serverMonitorAgentLabel;
     private javax.swing.JLabel serverPortLabel;
+    private javax.swing.JButton shutdownBtn;
     private javax.swing.JLabel statusAgentLabel;
+    private javax.swing.JMenuItem suspendMenuItem;
     private javax.swing.JButton updateWorkstationBtn;
     private javax.swing.JLabel workstationArchitectureLabel;
     private javax.swing.JLabel workstationIPLabel;

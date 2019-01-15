@@ -18,7 +18,9 @@ import javax.swing.table.DefaultTableModel;
 import server.StoreServer;
 import server.agent.ServerAgent;
 import server.ui.component.Chat;
+import server.ui.component.ControlAgent;
 import server.ui.component.CreateAgent;
+import server.ui.component.Notify;
 import server.ui.component.ServerMonitor;
 import utils.AgentUtil;
 import utils.Common;
@@ -159,6 +161,8 @@ public class ServerMonitorContainer {
                 Common.debug("MoveAgentCatch", agentName + "->" + locationName);
                 serverAgent.sendMessageMoveAgent(agentName, locationName);
             }
+        } else {
+            Common.toast(component, "Please select agent and location!");
         }
     }
     
@@ -173,6 +177,52 @@ public class ServerMonitorContainer {
             
             Common.toast(component, "Delete " + agentName);
             reloadListAgents();
+        } else {
+            Common.toast(component, "Please select agent!");
+        }
+    }
+    
+    public static void handleSuspendAgent() {
+        int indexSelectedAgent = listAgentsTable.getSelectedRow();
+        Common.debug("SuspendAgent", "" + indexSelectedAgent);
+        
+        if (indexSelectedAgent > -1) {
+            AMSAgentDescription selectedAgent = StoreServer.listAgents[indexSelectedAgent];
+            String agentName = selectedAgent.getName().getLocalName();
+            Common.toast(component, agentName + " suspended!");
+
+            try {
+                AgentController agentCtrl = StoreServer.mainContainer.getAgent(agentName);
+                agentCtrl.suspend();
+            } catch(ControllerException e) {
+                serverAgent.sendMessageSuspendAgent(agentName);
+            } finally {
+                serverAgent.loadListAgents();
+            }
+        } else {
+            Common.toast(component, "Please select agent!");
+        }
+    }
+    
+    public static void handleActiveAgent() {
+        int indexSelectedAgent = listAgentsTable.getSelectedRow();
+        Common.debug("ActiveAgent", "" + indexSelectedAgent);
+        
+        if (indexSelectedAgent > -1) {
+            AMSAgentDescription selectedAgent = StoreServer.listAgents[indexSelectedAgent];
+            String agentName = selectedAgent.getName().getLocalName();
+            Common.toast(component, agentName + " actived!");
+
+            try {
+                AgentController agentCtrl = StoreServer.mainContainer.getAgent(agentName);
+                agentCtrl.activate();
+            } catch(ControllerException e) {
+                serverAgent.sendMessageActiveAgent(agentName);
+            } finally {
+                serverAgent.loadListAgents();
+            }
+        } else {
+            Common.toast(component, "Please select agent!");
         }
     }
     
@@ -205,5 +255,36 @@ public class ServerMonitorContainer {
     
     public static void showCaptureScreen() {
         serverAgent.sendInternalRequest("capture-screen-server");
+    }
+    
+    public static void handleLogout() {
+        serverAgent.sendInternalRequest("logout-server");
+    }
+    
+    public static void handleRestart() {
+        serverAgent.sendInternalRequest("restart-server");
+    }
+    
+    public static void handleShutdown() {
+        serverAgent.sendInternalRequest("shutdown-server");
+    }
+    
+    public static void openModalNotify() {
+        new Notify().setVisible(true);
+    }
+    
+    public static void openModalControlAgent() {
+        int indexSelectedAgent = listAgentsTable.getSelectedRow();
+        Common.debug("ControlAgent", indexSelectedAgent + "");
+        
+        if (indexSelectedAgent > -1) {
+            AMSAgentDescription selectedAgent = StoreServer.listAgents[indexSelectedAgent];
+            String agentName = selectedAgent.getName().getLocalName();
+            new ControlAgent().setVisible(true);
+            ControlAgentContainer.setAgentName(agentName);
+            ControlAgentContainer.setServerAgent(serverAgent);
+        } else {
+            Common.toast(component, "Please select agent!");
+        }
     }
 }

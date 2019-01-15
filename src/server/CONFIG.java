@@ -11,5 +11,5 @@ package server;
  */
 public class CONFIG {
     public static String PATH_IMAGES = "D:\\Anh";
-    public static int PORT = 8080;
+    public static int PORT = 8088;
 }
